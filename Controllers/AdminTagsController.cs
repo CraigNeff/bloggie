@@ -9,7 +9,7 @@ namespace Bloggie.Web.Controllers
     {
         #region Add Tag Page
 
-        private BloggieDbContext _bloggieDbContext;
+        private readonly BloggieDbContext _bloggieDbContext;
         public AdminTagsController(BloggieDbContext bloggieDbContext)
         {
             this._bloggieDbContext = bloggieDbContext;
@@ -35,7 +35,17 @@ namespace Bloggie.Web.Controllers
             _bloggieDbContext.Tags.Add(tag);
             _bloggieDbContext.SaveChanges();
 
-            return View("Add");
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        [ActionName("List")]
+        public IActionResult List()
+        {
+            //use DbContext to read the tags
+            var tags = _bloggieDbContext.Tags.ToList();
+
+            return View(tags);
         }
 
         #endregion
