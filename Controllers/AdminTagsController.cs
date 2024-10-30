@@ -57,7 +57,8 @@ namespace Bloggie.Web.Controllers
             var tag = _bloggieDbContext.Tags.FirstOrDefault(t => t.Id == id);
 
             if (tag != null)
-            {
+            {   
+                //Turning the database response back into a model object 
                 var editTagRequest = new EditTagRequest
                 {
                     Id = tag.Id,
@@ -72,7 +73,8 @@ namespace Bloggie.Web.Controllers
 
         [HttpPost]
         public IActionResult Edit(EditTagRequest editTagRequest)
-        {
+        {   
+            //TUrning the view model back into a domain model
             var tag = new Tag
             {
                 Id = editTagRequest.Id,
@@ -91,6 +93,24 @@ namespace Bloggie.Web.Controllers
                 // Show Success notification 
                 return RedirectToAction("Edit", new { id = editTagRequest.Id });
             }
+            //Show error notification
+            return RedirectToAction("Edit", new { id = editTagRequest.Id });
+        }
+
+        [HttpPost]
+        public IActionResult Delete(EditTagRequest editTagRequest)
+        {
+            var tag = _bloggieDbContext.Tags.Find(editTagRequest.Id);
+
+            if (tag != null)
+            {
+                _bloggieDbContext.Tags.Remove(tag);
+                _bloggieDbContext.SaveChanges();
+
+                //Show a success notification
+                return RedirectToAction("List");
+            }
+
             //Show error notification
             return RedirectToAction("Edit", new { id = editTagRequest.Id });
         }
