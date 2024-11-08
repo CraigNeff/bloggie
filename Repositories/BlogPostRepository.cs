@@ -1,22 +1,23 @@
 ﻿using Bloggie.Web.Data;
 using Bloggie.Web.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bloggie.Web.Repositories
 {
     public class BlogPostRepository : IBlogPostRepository
     {
 
-        private readonly BloggieDbContext _blogPostRepository;
+        private readonly BloggieDbContext _bloggieDbContext;
 
         public BlogPostRepository(BloggieDbContext bloggieDbContext)
         {
-            this._blogPostRepository = bloggieDbContext;
+            this._bloggieDbContext = bloggieDbContext;
         }
 
         public async Task<BlogPost> AddAsync(BlogPost blogPost)
         {
-            await _blogPostRepository.AddAsync(blogPost);
-            await _blogPostRepository.SaveChangesAsync();
+            await _bloggieDbContext.AddAsync(blogPost);
+            await _bloggieDbContext.SaveChangesAsync();
             return blogPost;
         }
 
@@ -25,9 +26,9 @@ namespace Bloggie.Web.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BlogPost>> GetAll()
+        public async Task<IEnumerable<BlogPost>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _bloggieDbContext.BlogPosts.Include(x => x.Tags).ToListAsync();
         }
 
         public Task<BlogPost?> GetAsync(Guid id)
