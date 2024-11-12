@@ -87,7 +87,7 @@ namespace Bloggie.Web.Controllers
             var tagsDomainModel = await _tagRepository.GetAllAsync();
             if (blogPost != null)
             {
-                //map domain model into the view model 
+                //map domain model into the view model (blogPost is the domain model) model is going to be the view model
                 var model = new EditBlogPostRequest
                 {
                     Id = blogPost.Id,
@@ -113,6 +113,55 @@ namespace Bloggie.Web.Controllers
 
             //pass data to view 
             return View(null);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditBlogPostRequest editBlogPostRequest)
+        {
+            //map view model back to domain model 
+            var blogPostDomainModel = new BlogPost
+            {
+                Id = editBlogPostRequest.Id,
+                Heading = editBlogPostRequest.Heading,
+                PageTitle = editBlogPostRequest.PageTitle,
+                Content = editBlogPostRequest.Content,
+                Author = editBlogPostRequest.Author,
+                ShortDescription = editBlogPostRequest.ShortDescription,
+                FeaturedImageUrl = editBlogPostRequest.FeaturedImageUrl,
+                PublishedDate = editBlogPostRequest.PublishedDate,
+                UrlHandle = editBlogPostRequest.UrlHandle,
+                Visible = editBlogPostRequest.Visible
+            };
+
+            //Map tags into domain model 
+            var selectedTags = new List<Tag>();
+            foreach (var selectedTag in editBlogPostRequest.SelectedTags)
+            {
+                if (Guid.TryParse(selectedTag, out var tag))
+                {
+                    var foundTag = await _tagRepository.GetAsync(tag);
+
+                    if (foundTag != null)
+                    {
+                        selectedTags.Add(foundTag);
+                    }
+                }
+            }
+
+            blogPostDomainModel.Tags = selectedTags;
+
+            //Submit information to repository to update 
+            var updatedBlog = await _blogPostRepository.UpdateAsync(blogPostDomainModel);
+
+            if(updatedBlog != null)
+            {
+                //Show success notification
+                return RedirectToAction("Edit");
+            }
+            //redirect to GET
+            //Show error notification 
+            return RedirectToAction("Edit");
+
         }
     }
 
