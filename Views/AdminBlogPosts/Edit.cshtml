@@ -30,7 +30,7 @@
 
             <div class="mb-3">
                 <label class="form-label"> Content </label>
-                <textarea class="form-control" id="contenet" asp-for="Content"></textarea>
+                <textarea class="form-control" id="content" asp-for="Content"></textarea>
             </div>
 
             <div class="mb-3">
@@ -84,3 +84,9 @@
         <p> No Blog Post found!</p>
     }
 </div>
+
+@section Scripts {
+    <script>
+        var editor = new FroalaEditor('#content');
+    </script>
+}
