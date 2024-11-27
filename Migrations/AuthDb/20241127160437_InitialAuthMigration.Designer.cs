@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bloggie.Web.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20241127155250_InitialAuthMigration")]
+    [Migration("20241127160437_InitialAuthMigration")]
     partial class InitialAuthMigration
     {
         /// <inheritdoc />
@@ -169,15 +169,15 @@ namespace Bloggie.Web.Migrations.AuthDb
                         {
                             Id = "27b32bee-8c25-4a64-83d0-47421aea01cc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2878c34a-e294-47f3-8f7b-57536dc54ae1",
+                            ConcurrencyStamp = "69d16f71-afa7-43d9-920a-e4ba36f03500",
                             Email = "superadmin@bloggie.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@BLOGGIE.COM",
                             NormalizedUserName = "SUPERADMIN@BLOGGIE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEESt8YAy0E5LLlZH/zs+LxBOWOOTqYSIh7dPd6LsLknRdv7v/TzIseDX4dP+m+se4g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPlSB57Zzey1zqJtlWbsnHAqDdIQuDZ55r5d+JCXSukI6yCFsw/o+zrInY8rwg6mzA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6ec37892-7b04-48eb-b5fe-ac47a823608c",
+                            SecurityStamp = "a0dc3aff-8275-4b71-9b7b-e40761caf562",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@bloggie.com"
                         });
