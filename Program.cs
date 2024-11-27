@@ -15,7 +15,9 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("BloggieDbConnect
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BloggieAuthDbConnectionString")));
-builder.Services.AddIdentity<IdentityUser, IdentityRole>();
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<AuthDbContext>();
 
 
 builder.Services.AddScoped<ITagRepository, TagRepository>();
