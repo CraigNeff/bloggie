@@ -11,13 +11,26 @@ builder.Services.AddControllersWithViews();
 //Dependencey injecting the Databases here. 
 // Registering the database contexts with dependency injection container. Or put another way, Adding database contexts to the DI container for use in the application.
 builder.Services.AddDbContext<BloggieDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("BloggieDbConnectionString")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BloggieDbConnectionString")));
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("BloggieAuthDbConnectionString")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BloggieAuthDbConnectionString")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
+
+//Below: Setting up password rules
+builder.Services.Configure<IdentityOptions>(options =>
+{   
+    //Default Settings 
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+});
+
 
 
 builder.Services.AddScoped<ITagRepository, TagRepository>();
