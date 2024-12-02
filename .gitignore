@@ -8,3 +8,6 @@ obj/
 
 # Ignore other auto-generated files
 *.log
+
+#Ignore appsettings.json because it has an API key in it 
+appsettings.json
