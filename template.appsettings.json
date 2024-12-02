@@ -1,0 +1,18 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "BloggieDbConnectionString": "Server=(localdb)\\excellms;Database=BloggieDb;Trusted_Connection=True;TrustServerCertificate=Yes",
+    "BloggieAuthDbConnectionString": "Server=(localdb)\\excellms;Database=BloggieAuthDb;Trusted_Connection=True;TrustServerCertificate=Yes"
+  },
+  "Cloudinary": {
+    "CloudName": "YOUR_CLOUD_NANE_HERE",
+    "ApiKey": "YOUR_API_KEY_HERE",
+    "ApiSecret": "YOUR_API_SECRET_HERE"
+  }
+}
