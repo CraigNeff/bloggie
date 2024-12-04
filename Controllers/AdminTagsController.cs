@@ -18,13 +18,14 @@ namespace Bloggie.Web.Controllers
             this._tagRepository = tagRepository;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddTagRequest addTagRequest)
@@ -41,6 +42,7 @@ namespace Bloggie.Web.Controllers
             return RedirectToAction("List");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [ActionName("List")]
         public async Task<IActionResult> List()
@@ -51,6 +53,7 @@ namespace Bloggie.Web.Controllers
             return View(tags);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -71,6 +74,7 @@ namespace Bloggie.Web.Controllers
             return View(null);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(EditTagRequest editTagRequest)
         {   
@@ -96,6 +100,7 @@ namespace Bloggie.Web.Controllers
             return RedirectToAction("Edit", new { id = editTagRequest.Id });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(EditTagRequest editTagRequest)
         {
