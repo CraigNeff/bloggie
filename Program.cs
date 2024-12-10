@@ -36,6 +36,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository>();
+builder.Services.AddScoped<IBlogPostLikeRepository, BlogPostLikeRepository>(); // Think of it this way - If I asked for IBlogPostLikeRepository, give me the implementation of BlogPostLikeRepository instead.
 
 var app = builder.Build();
 

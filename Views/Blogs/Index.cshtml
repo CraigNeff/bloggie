@@ -1,4 +1,4 @@
-﻿@model Bloggie.Web.Models.Domain.BlogPost
+﻿@model Bloggie.Web.Models.ViewModels.BlogDetailsViewModel
 @{
     ViewData["Title"] = Model.PageTitle;
 }
@@ -7,7 +7,7 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-6">
-
+            
             @if (Model != null)
             {
                 <h1 class="mb-3">@Model.Heading</h1>
@@ -15,6 +15,10 @@
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-secondary">@Model.Author</span>
                     <span class="text-secondary">@Model.PublishedDate.ToShortDateString()</span>
+                </div>
+                
+                <div class="mb-3">
+                   <span>@Model.TotalLikes</span> likes
                 </div>
 
                 <div class="mb-3 d-flex">
