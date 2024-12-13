@@ -37,6 +37,7 @@ builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository>();
 builder.Services.AddScoped<IBlogPostLikeRepository, BlogPostLikeRepository>(); // Think of it this way - If I asked for IBlogPostLikeRepository, give me the implementation of BlogPostLikeRepository instead.
+builder.Services.AddScoped<IBlogPostCommentRepository, BlogPostCommentRepository>();
 
 var app = builder.Build();
 
