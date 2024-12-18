@@ -36,4 +36,5 @@ Here are the key concepts and features I am focusing on as I build out this proj
 
 This project is a work in progress, and I am continually updating it as I learn and apply new concepts. While the primary focus is on learning, the end goal is to have a functional blog application that demonstrates my understanding of the mentioned technologies.
 
+## Now announcing a new collaborator! Everyone, please welcome my co-worker Sam!
 
