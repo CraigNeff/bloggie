@@ -1,7 +1,9 @@
 ﻿using Bloggie.Web.Models.ViewModels;
 using Bloggie.Web.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Bloggie.Web.Controllers
 {
@@ -9,13 +11,17 @@ namespace Bloggie.Web.Controllers
     public class AdminUsersController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AdminUsersController(IUserRepository userRepository)
+        public AdminUsersController(IUserRepository userRepository, UserManager<IdentityUser> userManager)
         {
             this._userRepository = userRepository;
+            this._userManager = userManager;
         }
+
+        [HttpGet]
         public async Task<IActionResult> List()
-        {   
+        {
             var users = await _userRepository.GetAll();
 
             var usersViewModel = new UserViewModel();
@@ -33,5 +39,41 @@ namespace Bloggie.Web.Controllers
 
             return View(usersViewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> List(UserViewModel request)
+        {
+
+            var identityUser = new IdentityUser
+            {
+                UserName = request.Username,
+                Email = request.Email,
+            };
+
+            var identityResult = await _userManager.CreateAsync(identityUser, request.Password);
+
+            if (identityResult != null)
+            {
+                if (identityResult.Succeeded)
+                {
+                    var roles = new List<string> { "User" };
+
+                    if (request.AdminRoleCheckbox)
+                    {
+                        roles.Add("Admin");
+                    }
+
+                    identityResult = await _userManager.AddToRolesAsync(identityUser, roles);
+
+                    if (identityResult != null && identityResult.Succeeded)
+                    {
+                        return RedirectToAction("List", "AdminUsers");
+                    }
+                }
+            }
+
+            return View();
+        }
+            
     }
 }
