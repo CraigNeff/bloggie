@@ -74,6 +74,12 @@ namespace Bloggie.Web.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            return View();
+        }
             
     }
 }
