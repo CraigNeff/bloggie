@@ -78,6 +78,20 @@ namespace Bloggie.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
+            
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            if (user != null)
+            {
+                var identityresult = await _userManager.DeleteAsync(user);
+
+                if (identityresult != null && identityresult.Succeeded)
+                {
+                    return RedirectToAction("List", "AdminUsers");
+                }
+
+            }
+
             return View();
         }
             
