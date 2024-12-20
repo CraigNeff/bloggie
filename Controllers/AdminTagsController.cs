@@ -10,13 +10,17 @@ namespace Bloggie.Web.Controllers
 {
     public class AdminTagsController : Controller
     {
-        #region Add Tag Page
+        #region Controller 
 
         private readonly ITagRepository _tagRepository;
         public AdminTagsController(ITagRepository tagRepository)
         {
             this._tagRepository = tagRepository;
         }
+
+        #endregion
+
+        #region ActionMethods
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
@@ -29,7 +33,11 @@ namespace Bloggie.Web.Controllers
         [HttpPost]
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddTagRequest addTagRequest)
-        {   
+        {
+            if (ModelState.IsValid == false) 
+            {
+                return View();
+            }
             //Mapping AddTagRequest to Tag Domain Model
             Tag tag = new Tag
             {
@@ -116,7 +124,7 @@ namespace Bloggie.Web.Controllers
             return RedirectToAction("Edit", new { id = editTagRequest.Id });
         }
 
-
         #endregion
+
     }
 }
