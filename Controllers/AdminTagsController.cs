@@ -55,7 +55,7 @@ namespace Bloggie.Web.Controllers
         [Authorize(Roles = "Admin")]
         [HttpGet]
         [ActionName("List")]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string? searchQuery)
         {
             //use DbContext to read the tags
             var tags = await _tagRepository.GetAllAsync();
