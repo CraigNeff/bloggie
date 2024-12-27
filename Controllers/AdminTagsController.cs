@@ -57,8 +57,9 @@ namespace Bloggie.Web.Controllers
         [ActionName("List")]
         public async Task<IActionResult> List(string? searchQuery)
         {
+            ViewBag.SearchQuery = searchQuery;  
             //use DbContext to read the tags
-            var tags = await _tagRepository.GetAllAsync();
+            var tags = await _tagRepository.GetAllAsync(searchQuery);
 
             return View(tags);
         }
