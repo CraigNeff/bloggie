@@ -38,7 +38,10 @@ namespace Bloggie.Web.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<Tag>> GetAllAsync(string? searchQuery)
+        public async Task<IEnumerable<Tag>> GetAllAsync(
+            string? searchQuery,
+            string? sortBy,
+            string? sortDirection)
         {
             var query = _bloggieDbContext.Tags.AsQueryable();
             //filtering 
@@ -50,7 +53,21 @@ namespace Bloggie.Web.Repositories
 
             }
             //sorting
+            if (string.IsNullOrWhiteSpace(sortBy) == false)
+            {
+                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
 
+                if (string.Equals(sortBy, "Name", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = isDesc ? query.OrderByDescending(x => x.Name): query.OrderBy(x => x.Name);
+                }
+
+                if (string.Equals(sortBy, "DisplayName", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = isDesc ? query.OrderByDescending(x => x.DisplayName) : query.OrderBy(x => x.DisplayName);
+                }
+
+            }
             //pageination
 
             return await query.ToListAsync();

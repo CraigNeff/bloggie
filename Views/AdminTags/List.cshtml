@@ -34,7 +34,29 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
+                    <th>
+                        Name
+                        <span>
+                            <span>
+                                <a class="btn btn-light"
+                                    asp-controller="AdminTags"
+                                    asp-action="List"
+                                    asp-route-sortBy="Name"
+                                    asp-route-sortDirection="Asc">
+                                    <i class="bi bi-arrow-up"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a class="btn btn-light"
+                                   asp-controller="AdminTags"
+                                   asp-action="List"
+                                   asp-route-sortBy="Name"
+                                   asp-route-sortDirection="Desc">
+                                    <i class="bi bi-arrow-down"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </th>
                     <th>Display Name</th>
                     <th></th>
                 </tr>

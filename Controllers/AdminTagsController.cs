@@ -55,11 +55,17 @@ namespace Bloggie.Web.Controllers
         [Authorize(Roles = "Admin")]
         [HttpGet]
         [ActionName("List")]
-        public async Task<IActionResult> List(string? searchQuery)
+        public async Task<IActionResult> List(
+            string? searchQuery, 
+            string? sortBy, 
+            string? sortDirection)
         {
-            ViewBag.SearchQuery = searchQuery;  
+            ViewBag.SearchQuery = searchQuery;
+            ViewBag.SortBy = sortBy;
+            ViewBag.SortDirection = sortDirection;
+
             //use DbContext to read the tags
-            var tags = await _tagRepository.GetAllAsync(searchQuery);
+            var tags = await _tagRepository.GetAllAsync(searchQuery, sortBy, sortDirection);
 
             return View(tags);
         }
