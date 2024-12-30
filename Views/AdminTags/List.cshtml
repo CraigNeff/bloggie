@@ -42,7 +42,8 @@
                                     asp-controller="AdminTags"
                                     asp-action="List"
                                     asp-route-sortBy="Name"
-                                    asp-route-sortDirection="Asc">
+                                    asp-route-sortDirection="Asc"
+                                    asp-route-searchQuery="@ViewBag.SearchQuery">
                                     <i class="bi bi-arrow-up"></i>
                                 </a>
                             </span>
@@ -51,13 +52,38 @@
                                    asp-controller="AdminTags"
                                    asp-action="List"
                                    asp-route-sortBy="Name"
-                                   asp-route-sortDirection="Desc">
+                                   asp-route-sortDirection="Desc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
                                     <i class="bi bi-arrow-down"></i>
                                 </a>
                             </span>
                         </span>
                     </th>
-                    <th>Display Name</th>
+                    <th>
+                        Display Name
+                        <span>
+                            <span>
+                                <a class="btn btn-light"
+                                   asp-controller="AdminTags"
+                                   asp-action="List"
+                                   asp-route-sortBy="DisplayName"
+                                   asp-route-sortDirection="Asc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
+                                    <i class="bi bi-arrow-up"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a class="btn btn-light"
+                                   asp-controller="AdminTags"
+                                   asp-action="List"
+                                   asp-route-sortBy="DisplayName"
+                                   asp-route-sortDirection="Desc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
+                                    <i class="bi bi-arrow-down"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </th>
                     <th></th>
                 </tr>
             </thead>
