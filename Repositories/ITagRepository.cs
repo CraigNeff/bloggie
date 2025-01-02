@@ -17,6 +17,6 @@ namespace Bloggie.Web.Repositories
         
         Task<Tag?> DeleteAsync(Guid id);
 
-
+        Task<int> CountAsync();
     }
 }

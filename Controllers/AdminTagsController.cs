@@ -58,8 +58,12 @@ namespace Bloggie.Web.Controllers
         public async Task<IActionResult> List(
             string? searchQuery, 
             string? sortBy, 
-            string? sortDirection)
+            string? sortDirection,
+            int pageSize = 3)
         {
+            var totalRecords = await _tagRepository.CountAsync();
+            var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
+
             ViewBag.SearchQuery = searchQuery;
             ViewBag.SortBy = sortBy;
             ViewBag.SortDirection = sortDirection;
