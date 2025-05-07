@@ -38,5 +38,5 @@ This project is a work in progress, and I am continually updating it as I learn 
 
 ## Now announcing a new collaborator! Everyone, please welcome my co-worker Sam!
 Hey everyone! Very excited to be joining this project!
-Thank you Sam for being here!!
+Thank you Sam for being here!
 
